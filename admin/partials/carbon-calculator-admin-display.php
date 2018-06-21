@@ -28,7 +28,7 @@
                     <tr>
                         <th><?php esc_attr_e('Overall Text', $this->plugin_name); ?></th>
                         <td>
-                        <input type="type"
+                        <input type="text"
                         id="<?php echo $this->plugin_name; ?>-<?php echo $g; ?>-free_text_overall"
                         name="<?php echo $this->plugin_name; ?>[<?php echo $g; ?>-free_text_overall]"
                         value="<?php if(!empty($options[$g .'-free_text_overall'])) echo $options[$g .'-free_text_overall']; ?>"/>
@@ -37,7 +37,7 @@
                     <tr>
                         <th><?php esc_attr_e('Since Viewing Text', $this->plugin_name); ?></th>
                         <td>
-                        <input type="type"
+                        <input type="text"
                         id="<?php echo $this->plugin_name; ?>-<?php echo $g; ?>-free_text_current"
                         name="<?php echo $this->plugin_name; ?>[<?php echo $g; ?>-free_text_current]"
                         value="<?php if(!empty($options[$g . '-free_text_current'])) echo $options[$g .'-free_text_current']; ?>"/>

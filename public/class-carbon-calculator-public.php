@@ -75,11 +75,11 @@ class Carbon_Calculator_Public {
 		        data-savings-per-second='" . $per_sec_savings . "'
 		        data-period='1000'>";
 		    $output_string .= number_format( $savings_to_now ,3, ".", ",") . "</span> Kgs CO2e<br/>";
-		    $output_string .= $options[$generator . '-free_text_overall'] . "</p>";
+		    $output_string .= apply_filters('richedit_pre', $options[$generator . '-free_text_overall']) . "</p>";
 		    $output_string .= "<p><span class='page' data-total-savings='0'
 		                data-savings-per-second='" . $per_sec_savings . "'
 		                data-period='1000'></span> Kgs CO2e<br/>";
-		    $output_string .= $options[$generator . '-free_text_current'] . "</p>";
+		    $output_string .= apply_filters('richedit_pre', $options[$generator . '-free_text_current']) . "</p>";
 		    $output_string .= '</div>';
 		    return $output_string;
 		}

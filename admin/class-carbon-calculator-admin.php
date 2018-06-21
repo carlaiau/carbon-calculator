@@ -15,6 +15,10 @@ class Carbon_Calculator_Admin {
 	private $plugin_name;
 	private $version;
 
+	/*
+		The generators are an array of power companies, this allows for dynamic
+		creation of the form fields, the previews in admin
+	*/
 	private $generators;
 
 	public function __construct( $plugin_name, $version ) {
@@ -63,26 +67,45 @@ class Carbon_Calculator_Admin {
 	}
 
 	public function validate($input){
+		$valid_html =array(
+			'a' => array(
+				'href' => array(),
+				'title' => array()
+			),
+			'h1' => array(),
+			'h2' => array(),
+			'h3' => array(),
+			'h4' => array(),
+			'h5' => array(),
+			'h6' => array(),
+			'br' => array(),
+    		'em' => array(),
+    		'strong' => array()
+		);
+
 		$valid = array();
 		foreach($this->generators as $g){
 			$valid[$g .'-free_text_overall'] = (isset($input[$g .'-free_text_overall']) && !empty($input[$g .'-free_text_overall'])) ?
-				$input[$g .'-free_text_overall'] : '';
+				wp_kses($input[$g .'-free_text_overall'], $valid_html) : '';
 
 			$valid[$g .'-free_text_current'] = (isset($input[$g .'-free_text_current']) && !empty($input[$g .'-free_text_current'])) ?
-				$input[$g .'-free_text_current'] : '';
+				wp_kses($input[$g .'-free_text_current'], $valid_html) : '';
 
 			$valid[$g .'-initial_date'] = (isset($input[$g .'-initial_date']) && !empty($input[$g .'-initial_date'])) ?
 				preg_replace('([^0-9\-])', '', $input[$g .'-initial_date']) : 0;
-
 			$valid[$g .'-initial_savings'] = (isset($input[$g .'-initial_savings']) && !empty($input[$g .'-initial_savings'])) ?
 				preg_replace('([^0-9.])', '', $input[$g .'-initial_savings']) : 0;
-
 			$valid[$g .'-yearly_savings'] = (isset($input[$g .'-yearly_savings']) && !empty($input[$g .'-yearly_savings'])) ?
 				preg_replace('([^0-9.])', '', $input[$g .'-yearly_savings']) : 0;
 		}
 		return $valid;
 	}
 
+	/*
+	 *
+	 * Called from the partial file to output the preview of each carbon calculator
+	 *
+	 */
 	public function output_each_generation($gen, $inital_date, $yearly_savings, $inital_savings, $free_text_overall, $free_text_current){
 		$today_datetime = new DateTime();
 		$today_datetime->setTimezone(new DateTimeZone("Pacific/Auckland") );
