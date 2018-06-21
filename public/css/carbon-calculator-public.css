@@ -1,0 +1,28 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+.entry-header,
+body.has-header-image .site-description{
+    display:none;
+}
+body.page-two-column:not(.archive) #content #primary .entry-content{
+    width: 100%;
+    float:left;
+}
+
+.carbon-output p{
+    font-size:1em;
+    font-family: 'Archer SSm A','Archer SSm B';
+    font-style: italic;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #213e5f;
+}
+.carbon-output p strong{
+    font-size: 2em;
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Gotham Rounded SSm A","Gotham Rounded SSm B",sans-serif;
+    padding-right:1px;
+}
